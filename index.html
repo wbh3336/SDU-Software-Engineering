@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网上书店系统</title>
+    <style>
+        /* 简单样式，让页面好看一点 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "微软雅黑";
+        }
+          body {
+            background-image: url("bg.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        /* 顶部导航栏 */
+        .nav {
+            background: #2c7be5;
+            padding: 15px;
+            text-align: center;
+        }
+        .nav a {
+            color: white;
+            margin: 0 12px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+        /* 内容区 */
+           .container {
+            width: 900px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.88); /* 半透明白色 */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(6px); /* 毛玻璃效果，高级感！ */
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部导航栏（所有跳转都在这里） -->
+    <div class="nav">
+        <a href="index.html">首页</a>
+        <a href="books.html">浏览图书</a>
+        <a href="login.html">用户登录</a>
+        <a href="register.html">用户注册</a>
+        <a href="info.html">书店公告/留言</a>
+        <a href="admin/login.html">店主后台</a>
+    </div>
+
+    <!-- 页面内容 -->
+    <div class="container">
+        <h1>欢迎来到网上书店系统</h1>
+        <br>
+        <p>这里是网上书店首页，您可以：</p>
+        <br>
+        <p>• 浏览所有图书信息</p>
+        <p>• 注册会员，登录后购买图书</p>
+        <p>• 查看书店公告、给书店留言</p>
+        <p>• 店主可进入后台管理图书、订单、库存、客户信息</p>
+    </div>
+
+</body>
+</html>

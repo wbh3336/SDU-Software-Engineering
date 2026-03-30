@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图书浏览</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "微软雅黑";
+        }
+        body {
+            background: white; /* 纯白底色 */
+            padding: 20px;
+        }
+        /* 返回首页按钮 */
+        .back-btn {
+            padding: 10px 20px;
+            background: #2c7be5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .container {
+            width: 1000px;
+            margin: 0 auto;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        /* 图书列表样式 */
+        .book-item {
+            border: 1px solid #eee;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .book-item img {
+            width: 80px;
+            height: 110px;
+            background: #eee;
+            object-fit: cover;
+        }
+        .book-info {
+            flex: 1;
+        }
+        .book-info h3 {
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+        .book-info p {
+            color: #666;
+            margin-bottom: 4px;
+        }
+        .price {
+            color: red;
+            font-weight: bold;
+            font-size: 17px;
+        }
+        .buy-btn {
+            padding: 8px 14px;
+            background: #ff4d4f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 顶部按钮：返回首页 + 右上角购物车 -->
+<div style="margin-bottom:20px; position:relative;">
+    <button style="padding:10px 20px; background:#2c7be5; color:white; border:none; border-radius:5px; cursor:pointer;" onclick="location.href='index.html'">← 返回首页</button>
+    <button style="position:absolute; right:0; top:0; padding:10px 20px; background:#ff4d4f; color:white; border:none; border-radius:5px; cursor:pointer;" onclick="location.href='cart.html'">🛒 购物车</button>
+</div>
+
+<div class="container">
+    <h2>图书列表</h2>
+
+    <!-- 图书1 -->
+    <div class="book-item">
+        <img src="前端开发.png">
+        <div class="book-info">
+            <h3>前端开发实战</h3>
+            <p>作者：前端老师</p>
+            <p>分类：计算机 / 前端</p>
+        </div>
+        <div class="price">¥49</div>
+        <button class="buy-btn" onclick="alert('请先登录')">加入购物车</button>
+    </div>
+
+    <!-- 图书2 -->
+    <div class="book-item">
+        <img src="python.webp">
+        <div class="book-info">
+            <h3>Python入门到精通</h3>
+            <p>作者：Python老师</p>
+            <p>分类：计算机 / Python</p>
+        </div>
+        <div class="price">¥39</div>
+        <button class="buy-btn" onclick="alert('请先登录')">加入购物车</button>
+    </div>
+
+    <!-- 图书3 -->
+    <div class="book-item">
+        <img src="4.jpg">
+        <div class="book-info">
+            <h3>大学英语四级</h3>
+            <p>作者：英语教研室</p>
+            <p>分类：教材 / 英语</p>
+        </div>
+        <div class="price">¥29</div>
+        <button class="buy-btn" onclick="alert('请先登录')">加入购物车</button>
+    </div>
+
+    <!-- 图书4 -->
+    <div class="book-item">
+        <img src="math.avif">
+        <div class="book-info">
+            <h3>高等数学（上册）</h3>
+            <p>作者：数学系</p>
+            <p>分类：教材 / 数学</p>
+        </div>
+        <div class="price">¥59</div>
+        <button class="buy-btn" onclick="alert('请先登录')">加入购物车</button>
+    </div>
+
+</div>
+
+</body>
+</html>

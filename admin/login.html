@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>管理员登录</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:微软雅黑}
+        body{background:#f5f7fa;padding:50px;display:flex;align-items:center;justify-content:center;height:100vh}
+        .box{width:400px;background:#fff;padding:40px;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,0.05)}
+        h2{text-align:center;margin-bottom:30px}
+        input{width:100%;padding:14px;margin:8px 0;border:1px solid #ddd;border-radius:8px}
+        button{width:100%;padding:14px;background:#2c7be5;color:white;border:none;border-radius:8px;margin-top:10px;cursor:pointer}
+        .back{text-align:center;margin-top:20px}
+        .back a{color:#666;text-decoration:none}
+    </style>
+</head>
+<body>
+<div class="box">
+    <h2>管理员登录</h2>
+    <input placeholder="账号" id="user">
+    <input type="password" placeholder="密码" id="pwd">
+    <button onclick="login()">登录</button>
+    <div class="back">
+        <a href="../index.html">返回首页</a>
+    </div>
+</div>
+<script>
+function login(){
+    let u=document.getElementById("user").value;
+    let p=document.getElementById("pwd").value;
+    if(u=="admin"&&p=="123456"){
+        alert("登录成功");
+        location.href="index.html";
+    }else{
+        alert("账号或密码错误");
+    }
+}
+</script>
+</body>
+</html>

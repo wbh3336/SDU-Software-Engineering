@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "微软雅黑";
+        }
+        body {
+            background-image: url("bg1.jpg");
+            background-size: cover;
+            background-position: center;
+            padding: 50px;
+        }
+        .register-box {
+            width: 400px;
+            background: rgba(255,255,255,0.95);
+            margin: 100px auto;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #2c7be5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        a {
+            color: #2c7be5;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="register-box">
+    <h2>用户注册</h2>
+    <input type="text" placeholder="请输入用户名">
+    <input type="password" placeholder="请输入密码">
+    <input type="password" placeholder="请确认密码">
+    <button>注册</button>
+    <div class="link">
+        已有账号？<a href="login.html">立即登录</a><br>
+        <a href="index.html">返回首页</a>
+    </div>
+</div>
+
+</body>
+</html>

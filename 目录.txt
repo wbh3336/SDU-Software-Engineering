@@ -1,0 +1,17 @@
+bookstore/
+├── index.html          🏠 前台首页（所有人可见）
+├── login.html          👤 用户登录
+├── register.html       📝 用户注册
+├── books.html          📚 图书浏览 + 分类 + 选购
+├── cart.html           🛒 购物车（登录后才能用）
+├── info.html           📢 书店简介 + 公告 + 留言
+│
+└── admin/              🔒 后台管理文件夹（店主专用）
+    ├── login.html      🔑 店主登录（管理员登录）
+    ├── index.html      🖥️  后台主页（左侧菜单）
+    ├── book.html       📦 进书管理
+    ├── stock.html      📊 库存管理
+    ├── order.html      🧾 售书/订单管理
+    ├── customer.html   👥 客户管理
+    ├── money.html      💰 账目管理
+    └── maintain.html   🔧 网站维护
