@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "微软雅黑", sans-serif;
+        }
+
+        body {
+            background: #fafafa;
+            padding: 40px 20px;
+        }
+
+        /* 返回按钮 */
+        .back-btn {
+            padding: 10px 24px;
+            background: #409eff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+            margin-bottom: 30px;
+            transition: 0.2s;
+        }
+        .back-btn:hover {
+            background: #338ecc;
+        }
+
+        /* 容器卡片 */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 28px;
+            color: #333;
+            font-size: 22px;
+        }
+
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+
+        table th {
+            background: #f8f9fa;
+            padding: 16px;
+            color: #555;
+            font-weight: normal;
+            border-bottom: 1px solid #eee;
+        }
+
+        table td {
+            padding: 16px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            color: #444;
+        }
+
+        /* 合计 */
+        .total {
+            text-align: right;
+            font-size: 19px;
+            font-weight: bold;
+            color: #e53935;
+            margin-bottom: 20px;
+        }
+
+        /* 结算按钮 */
+        .buy-btn {
+            padding: 12px 30px;
+            background: #ff4d4f;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+        .buy-btn:hover {
+            background: #e64144;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="back-btn" onclick="location.href='books.html'">← 返回图书页面</button>
+
+    <div class="container">
+        <h2>我的购物车</h2>
+        <table>
+            <tr>
+                <th>图书名称</th>
+                <th>单价</th>
+                <th>数量</th>
+                <th>小计</th>
+            </tr>
+            <tr>
+                <td colspan="4">请先登录后查看购物车</td>
+            </tr>
+        </table>
+
+        <div class="total">合计：¥ 0</div>
+        <button class="buy-btn" onclick="alert('请登录后结算')">结算</button>
+    </div>
+</body>
+</html>

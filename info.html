@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>书店信息 & 留言</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "微软雅黑";
+        }
+        body {
+            background-image: url("bg.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .nav {
+              background: #2c7be5;
+            padding: 15px;
+            text-align: center;
+        }
+        .nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .container {
+            width: 1000px;
+            margin: 30px auto;
+            background: rgba(255,255,255,0.92);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+        .box {
+            margin-bottom: 30px;
+        }
+        h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        p {
+            line-height: 1.7;
+            font-size: 16px;
+        }
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #2c7be5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .msg {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="nav">
+    <a href="index.html">首页</a>
+    <a href="books.html">浏览图书</a>
+    <a href="login.html">用户登录</a>
+    <a href="register.html">用户注册</a>
+    <a href="info.html">书店公告/留言</a>
+    <a href="admin/login.html">店主后台</a>
+</div>
+
+<div class="container">
+    <div class="box">
+        <h2>书店简介</h2>
+        <p>本网上书店提供各类图书在线浏览、选购服务，支持会员注册、登录、购物车、订单管理等功能。</p>
+    </div>
+
+    <div class="box">
+        <h2>最新公告</h2>
+        <p>1. 新书已上架</p>
+        <p>2. 注册即可享受优惠</p>
+        <p>3. 留言功能已开放</p>
+    </div>
+
+    <div class="box">
+        <h2>客户留言</h2>
+        <div class="msg">用户：书很好，下次还来！</div>
+        <div class="msg">用户：发货很快！</div>
+        <textarea placeholder="写下你的留言..."></textarea>
+        <button onclick="alert('留言成功！')">提交留言</button>
+    </div>
+</div>
+
+</body>
+</html>
