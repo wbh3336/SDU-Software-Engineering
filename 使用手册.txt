@@ -1,0 +1,260 @@
+# 小型网上书店数据库函数使用手册
+（直接复制保存为txt即可，纯文本无格式）
+
+========================================
+## 一、基础使用说明
+========================================
+
+### 导入方式
+# 导入所有函数
+from bookstore_db import *
+
+# 按需导入单个函数
+from bookstore_db import add_user, create_order, get_books_by_category
+
+### 通用返回值规则
+- 新增操作：成功返回自增ID(user_id/book_id等)，失败返回None
+- 修改/删除操作：成功返回True，失败返回False
+- 查询操作：单条返回字典{}，多条返回字典列表[{},{}]，无数据返回空列表[]
+- 所有数据库错误已内部捕获并打印，不会导致后端程序崩溃
+
+========================================
+## 二、工具函数
+========================================
+
+### hash_password(password)
+- 功能：密码MD5加密
+- 参数：password - 明文密码
+- 返回：加密后的32位字符串
+- 示例：hash_password("123456")
+- 说明：注册和登录时必须使用该函数加密，数据库不存储明文密码
+
+========================================
+## 三、用户操作(users表)
+========================================
+
+### 1. add_user(username, password, role='member', phone=None)
+- 功能：用户注册
+- 参数：
+  username - 用户名(唯一)
+  password - 明文密码(自动加密)
+  role - 角色，可选'member'(会员，默认)或'admin'(店主)
+  phone - 联系电话(可选)
+- 返回：成功返回用户ID，失败返回None
+- 示例：
+  add_user("zhangsan", "123456", phone="13800138000")
+  add_user("admin", "admin123", role="admin")
+
+### 2. get_user_by_username(username)
+- 功能：根据用户名查询用户(用于登录验证)
+- 参数：username - 用户名
+- 返回：用户字典(包含user_id/username/password_hash/role等)，不存在返回None
+- 示例：
+  user = get_user_by_username("zhangsan")
+  if user and user['password_hash'] == hash_password("123456"):
+      print("登录成功")
+
+### 3. get_user_by_id(user_id)
+- 功能：根据用户ID查询用户
+- 参数：user_id - 用户ID
+- 返回：用户字典，不存在返回None
+
+### 4. update_user_password(user_id, new_password)
+- 功能：修改用户密码
+- 参数：
+  user_id - 用户ID
+  new_password - 新明文密码(自动加密)
+- 返回：成功返回True，失败返回False
+
+### 5. get_all_users()
+- 功能：店主查询所有会员列表
+- 返回：会员字典列表(不包含店主账号)
+
+========================================
+## 四、图书操作(books表)
+========================================
+
+### 1. add_book(title, author, price, stock, category, description=None)
+- 功能：添加新图书
+- 参数：
+  title - 书名
+  author - 作者
+  price - 价格(如59.8)
+  stock - 库存数量
+  category - 分类(如"计算机"/"文学")
+  description - 图书简介(可选)
+- 返回：成功返回图书ID，失败返回None
+
+### 2. get_book_by_id(book_id)
+- 功能：根据ID查询单本图书详情
+- 返回：图书字典，不存在返回None
+
+### 3. get_books_by_category(category=None)
+- 功能：按分类查询图书，不传参数返回所有图书
+- 参数：category - 图书分类(可选)
+- 返回：图书字典列表
+
+### 4. update_book(book_id, **kwargs)
+- 功能：更新图书信息(支持部分更新)
+- 参数：
+  book_id - 图书ID
+  **kwargs - 要更新的字段(如title="新书名"/price=69.8)
+- 返回：成功返回True，失败返回False
+- 示例：update_book(1, price=69.8, stock=200)
+
+### 5. delete_book(book_id)
+- 功能：删除图书
+- 注意：如果该图书已有订单记录，会因外键约束删除失败
+- 返回：成功返回True，失败返回False
+
+### 6. update_book_stock(book_id, quantity, db=None)
+- 功能：更新图书库存
+- 参数：
+  book_id - 图书ID
+  quantity - 变化量，正数增加库存，负数减少库存
+  db - 数据库连接对象(用于事务，后端无需传参)
+- 返回：成功返回True(库存足够)，失败返回False(库存不足)
+
+========================================
+## 五、购物车操作(carts表)
+========================================
+
+### 1. add_to_cart(user_id, book_id, quantity=1)
+- 功能：添加商品到购物车，已存在则累加数量
+- 返回：成功返回True，失败返回False
+
+### 2. get_user_cart(user_id)
+- 功能：查询用户购物车(自动关联图书信息)
+- 返回：购物车项字典列表，包含book_id/title/price/quantity/subtotal(小计)
+- 示例返回：
+  [
+      {
+          "cart_id": 1,
+          "book_id": 1,
+          "title": "Python编程从入门到实践",
+          "author": "埃里克·马瑟斯",
+          "price": Decimal("59.80"),
+          "quantity": 2,
+          "subtotal": Decimal("119.60")
+      }
+  ]
+
+### 3. update_cart_item(cart_id, quantity)
+- 功能：更新购物车商品数量
+- 返回：成功返回True，失败返回False
+
+### 4. delete_cart_item(cart_id)
+- 功能：删除购物车中的单个商品
+- 返回：成功返回True，失败返回False
+
+### 5. clear_user_cart(user_id, db=None)
+- 功能：清空用户购物车(下单后自动调用，后端无需手动调用)
+- 返回：成功返回True，失败返回False
+
+========================================
+## 六、订单操作(orders+order_items表)
+========================================
+
+### 1. create_order(user_id, cart_items)
+- 功能：创建订单(核心函数，内置完整事务)
+- 自动执行：
+  1. 计算订单总金额
+  2. 创建订单主记录
+  3. 创建订单明细记录
+  4. 扣减对应图书库存
+  5. 清空用户购物车
+- 事务保证：以上步骤要么全部成功，要么全部回滚，不会出现超卖或数据不一致
+- 参数：
+  user_id - 下单用户ID
+  cart_items - 购物车数据，格式必须为get_user_cart()返回的列表
+- 返回：成功返回订单ID，失败返回None
+- 示例：
+  cart = get_user_cart(user_id)
+  order_id = create_order(user_id, cart)
+
+### 2. get_order_by_id(order_id)
+- 功能：查询订单详情(包含订单明细)
+- 返回：订单字典，包含items字段(订单明细列表)
+
+### 3. get_user_orders(user_id)
+- 功能：查询某个用户的所有订单(按时间倒序)
+- 返回：订单主表字典列表
+
+### 4. get_all_orders(status=None)
+- 功能：店主查询所有订单，可按状态筛选
+- 参数：status - 订单状态，可选'pending'(待发货)/'shipped'(已发货)/'completed'(已完成)/'cancelled'(已取消)
+- 返回：订单主表字典列表
+
+### 5. update_order_status(order_id, new_status)
+- 功能：更新订单状态
+- 返回：成功返回True，失败返回False
+
+========================================
+## 七、留言操作(messages表)
+========================================
+
+### 1. add_message(user_id, content)
+- 功能：用户添加留言
+- 返回：成功返回留言ID，失败返回None
+
+### 2. get_all_messages()
+- 功能：店主查询所有留言(自动关联用户名)
+- 返回：留言字典列表，包含username字段
+
+### 3. reply_message(message_id, reply_content)
+- 功能：店主回复留言
+- 返回：成功返回True，失败返回False
+
+========================================
+## 八、完整业务流程示例
+========================================
+
+from bookstore_db import *
+
+# 1. 用户注册
+user_id = add_user("lisi", "654321", phone="13900139000")
+
+# 2. 用户登录
+user = get_user_by_username("lisi")
+if user and user['password_hash'] == hash_password("654321"):
+    print("登录成功")
+
+# 3. 浏览图书
+books = get_books_by_category("计算机")
+print("计算机类图书：", books)
+
+# 4. 添加到购物车
+add_to_cart(user_id, books[0]['book_id'], 1)
+
+# 5. 查看购物车
+cart = get_user_cart(user_id)
+print("购物车：", cart)
+
+# 6. 下单
+order_id = create_order(user_id, cart)
+if order_id:
+    print(f"下单成功，订单号：{order_id}")
+
+# 7. 查看订单详情
+order = get_order_by_id(order_id)
+print("订单详情：", order)
+
+# 8. 用户留言
+add_message(user_id, "什么时候发货？")
+
+# 9. 店主查看留言
+messages = get_all_messages()
+print("所有留言：", messages)
+
+# 10. 店主回复留言
+reply_message(messages[0]['message_id'], "今天下午发货")
+
+========================================
+## 九、注意事项
+========================================
+
+1. 不要修改db_config.py和.env文件，数据库连接已统一封装
+2. 所有密码必须通过hash_password()函数加密后再传入
+3. create_order()已处理所有事务逻辑，后端无需手动开启事务
+4. 不能删除已有订单的图书，如需删除请先删除对应的订单记录
+5. 所有返回的Decimal类型价格可以直接转成字符串返回给前端
